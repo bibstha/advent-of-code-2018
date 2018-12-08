@@ -21,16 +21,13 @@ inputs.each do |input|
   end
 end
 
-total = 0
-square_size.times do |i|
-  square_size.times do |j|
-    if space[i][j] > 1
-      total += 1
-    end
-  end
+total = space.sum do |column_array|
+  column_array.sum { |x| x > 1 ? 1 : 0 }
 end
 
 puts total
+
+# Solution 97218
 
 __END__
 #1 @ 3,2: 4x4
