@@ -8,23 +8,7 @@ class Solution1
   end
 
   def run
-    root_child_count = @input[0]
-    root_metadata_count = @input[1]
-    root_metadata = @input.last(root_metadata_count)
-
-    root_children = build_nodes(root_child_count, @input[2..-(root_metadata_count+1)])
-    root_special_sum = root_metadata.sum do |i|
-      root_children[i-1] ? root_children[i-1].special_sum : 0
-    end
-
-    root_node = Node.new(
-      root_children,
-      root_metadata,
-      root_children.sum(&:total_size) + 2 + root_metadata_count,
-      root_children.sum(&:metadata_sum) + root_metadata.sum,
-      root_special_sum,
-    )
-
+    root_node = build_nodes(1, @input).first
     puts "Part1: Sum of all metadata = #{root_node.metadata_sum}"
     puts "Part2: Special sum of all metadata = #{root_node.special_sum}"
   end
